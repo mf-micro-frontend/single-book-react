@@ -15,6 +15,9 @@ export default defineConfig({
         "./App": "./src/App",
       },
       shared: ["react", "react-dom", "tailwindcss"],
+      remotes: {
+        host: "http://localhost:5001/assets/remoteEntry.js",
+      },
     }),
   ],
   build: {

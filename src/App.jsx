@@ -1,8 +1,10 @@
 import { useState, useEffect, useCallback } from "react";
 import Button from "./components/Button";
-// import artOfCoding from "./assets/artOfCoding.jpg";
+import { useGlobalContext } from "host/GlobalContext";
 
 const App = () => {
+  const { selectedBook, setCart } = useGlobalContext();
+
   // State for book details
   const [book, setBook] = useState({
     title: "",
@@ -69,22 +71,36 @@ const App = () => {
   };
 
   // Handle add to cart
-  const handleAddToCart = () => {};
+  const handleAddToCart = () => {
+    const data = {
+      title: book.title,
+      image: book.images[0],
+      bookId: book.id,
+      quantity: quantity,
+    };
+
+    setCart((prevCart) => {
+      const existingItemIndex = prevCart.findIndex(
+        (item) => item.bookId === data.bookId
+      );
+      if (existingItemIndex !== -1) {
+        const updatedCart = [...prevCart];
+        updatedCart[existingItemIndex].quantity += data.quantity;
+        return updatedCart;
+      } else {
+        return [...prevCart, { ...data, quantity: data.quantity }];
+      }
+    });
+  };
 
   // Handle incoming messages
   useEffect(() => {
-    const handleMessage = (event) => {
-      const { action, payload } = event.data;
-      if (action === "SHOW_SINGLE_BOOK") {
-        fetchBookDetails(payload);
-      }
-    };
+    if (selectedBook) {
+      fetchBookDetails(selectedBook);
+    }
 
-    window.addEventListener("message", handleMessage);
-    return () => {
-      window.removeEventListener("message", handleMessage);
-    };
-  }, [fetchBookDetails]);
+    return () => {};
+  }, [selectedBook, fetchBookDetails]);
 
   return (
     <div className="flex w-full h-full items-center justify-center">
