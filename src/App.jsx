@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import Button from "./components/Button";
-import artOfCoding from "./assets/artOfCoding.jpg";
+// import artOfCoding from "./assets/artOfCoding.jpg";
 
 const App = () => {
   // State for book details
@@ -100,7 +100,7 @@ const App = () => {
             {/* Featured Book */}
             <div className="flex flex-col items-center w-4/5">
               <img
-                src={artOfCoding}
+                src={"http://localhost:5003/images/artOfCoding.jpg"}
                 alt="Featured Book Cover"
                 className="w-52 h-68 object-cover rounded-lg shadow-md"
               />
