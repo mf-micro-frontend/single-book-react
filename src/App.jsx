@@ -87,7 +87,7 @@ const App = () => {
   }, [fetchBookDetails]);
 
   return (
-    <div className="flex w-full h-full items-center justify-center mt-4">
+    <div className="flex w-full h-full items-center justify-center">
       {/* Placeholder View */}
       {!book.title && (
         <div className="flex flex-col items-center justify-center gap-4 p-8 w-4/5 text-center bg-gradient-to-r from-purple-500 to-indigo-500 text-white rounded-lg">
@@ -98,11 +98,11 @@ const App = () => {
           </p>
           <div className="flex flex-col md:flex-row gap-6 items-center">
             {/* Featured Book */}
-            <div className="flex flex-col items-center w-4/5">
+            <div className="flex flex-col items-center w-full">
               <img
                 src={"http://localhost:5003/images/artOfCoding.jpg"}
                 alt="Featured Book Cover"
-                className="w-52 h-68 object-cover rounded-lg shadow-md"
+                className="w-52 h-full object-cover rounded-lg shadow-md"
               />
               <h2 className="text-2xl font-semibold mt-4">The Art of Coding</h2>
               <p className="text-sm">
