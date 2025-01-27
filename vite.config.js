@@ -14,10 +14,11 @@ export default defineConfig({
       exposes: {
         "./App": "./src/App",
       },
-      shared: ["react", "react-dom", "tailwindcss"],
       remotes: {
         host: "http://localhost:5001/assets/remoteEntry.js",
+        shared: "http://localhost:5099/assets/remoteEntry.js",
       },
+      shared: ["react", "react-dom", "tailwindcss"],
     }),
   ],
   build: {

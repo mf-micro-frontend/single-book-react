@@ -1,11 +1,11 @@
-import { useState, useEffect, useCallback } from "react";
-import Button from "./components/Button";
+import { useState, useEffect, useCallback, lazy } from "react";
 import { useGlobalContext } from "host/GlobalContext";
+
+const Button = lazy(() => import("shared/Button"));
 
 const App = () => {
   const { selectedBook, setCart } = useGlobalContext();
 
-  // State for book details
   const [book, setBook] = useState({
     title: "",
     author: "",
@@ -21,7 +21,6 @@ const App = () => {
   const [mainImage, setMainImage] = useState("");
   const [quantity, setQuantity] = useState(1);
 
-  // Fetch book details
   const fetchBookDetails = useCallback(async (bookId) => {
     try {
       const response = await fetch(
