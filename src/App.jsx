@@ -100,7 +100,9 @@ const App = () => {
             {/* Featured Book */}
             <div className="flex flex-col items-center w-full">
               <img
-                src={"http://localhost:5003/images/artOfCoding.jpg"}
+                src={`${
+                  import.meta.env.VITE_SINGLE_BOOK_APP_URL
+                }/images/artOfCoding.jpg`}
                 alt="Featured Book Cover"
                 className="w-52 h-full object-cover rounded-lg shadow-md"
               />
