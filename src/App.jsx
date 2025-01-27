@@ -4,7 +4,7 @@ import { useGlobalContext } from "host/GlobalContext";
 const Button = lazy(() => import("shared/Button"));
 
 const App = () => {
-  const { selectedBook, setCart } = useGlobalContext();
+  const { selectedBook, addToCart } = useGlobalContext();
 
   const [book, setBook] = useState({
     title: "",
@@ -57,19 +57,16 @@ const App = () => {
     }
   }, []);
 
-  // Parse HTML to text
   const parseHTMLtoText = (htmlString) => {
     const parser = new DOMParser();
     const doc = parser.parseFromString(htmlString, "text/html");
     return doc.body.textContent.trim();
   };
 
-  // Handle thumbnail click
   const handleThumbnailClick = (image) => {
     setMainImage(image);
   };
 
-  // Handle add to cart
   const handleAddToCart = () => {
     const data = {
       title: book.title,
@@ -78,21 +75,9 @@ const App = () => {
       quantity: quantity,
     };
 
-    setCart((prevCart) => {
-      const existingItemIndex = prevCart.findIndex(
-        (item) => item.bookId === data.bookId
-      );
-      if (existingItemIndex !== -1) {
-        const updatedCart = [...prevCart];
-        updatedCart[existingItemIndex].quantity += data.quantity;
-        return updatedCart;
-      } else {
-        return [...prevCart, { ...data, quantity: data.quantity }];
-      }
-    });
+    addToCart(data);
   };
 
-  // Handle incoming messages
   useEffect(() => {
     if (selectedBook) {
       fetchBookDetails(selectedBook);
