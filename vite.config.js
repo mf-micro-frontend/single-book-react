@@ -3,8 +3,8 @@ import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import federation from "@originjs/vite-plugin-federation";
 
-export default defineConfig(({ command, mode }) => {
-  // Load environment variables based on the current mode (development, production, etc.)
+export default defineConfig(({ mode }) => {
+  // eslint-disable-next-line no-undef
   const env = loadEnv(mode, process.cwd(), "");
 
   return {
